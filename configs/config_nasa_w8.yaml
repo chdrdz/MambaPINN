@@ -1,0 +1,59 @@
+seed: 42
+device: auto
+
+paths:
+  mit_raw_dir: data/raw/mit
+  sohbenchmark_mit_raw_dir: d:/MyPaperCode/20260518_SOHbenchmark-main_ByXJT/SOHbenchmark-main/data/MIT
+  nasa_raw_dir: data/raw/nasa
+  calce_raw_dir: data/raw/calce
+  checkpoint_dir: results/checkpoints_nasa_w8
+  metrics_dir: results/metrics_nasa_w8
+  figure_dir: results/figures_nasa_w8
+
+experiment:
+  dataset: nasa
+  target: soh
+  train_cells: 2
+  valid_cells: 1
+  test_cells: 1
+
+preprocess:
+  window_size: 8
+  stride: 3
+  normalize: true
+
+rated_capacity:
+  mit: 1.1
+  sohbenchmark_mit: 1.1
+  nasa: 2.0
+  calce: 2.0
+
+model:
+  d_model: 64
+  n_layers: 2
+  dropout: 0.1
+  backend: simple
+
+physics:
+  r_init: 0.01
+  c_max_init: 1.0
+  c_min_init: 0.7
+  eps: 1.0e-6
+  monotonic_weight: 0.1
+  tail_steps: 0
+
+loss:
+  use_physics: true
+  use_boundary: true
+  use_adaptive_balance: true
+  lambda_physics: 1.0
+  lambda_boundary: 0.1
+
+train:
+  batch_size: 64
+  epochs: 500
+  lr: 0.001
+  weight_decay: 1.0e-5
+  num_workers: 0
+  patience: 50
+  grad_clip: 1.0
